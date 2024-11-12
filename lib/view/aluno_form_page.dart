@@ -7,7 +7,7 @@ class AlunoFormPage extends StatefulWidget {
   final AlunoPresenter presenter; // O presenter que gerencia a lógica do formulário.
 
   // Construtor da página de formulário. Recebe o presenter como argumento.
-  const AlunoFormPage({required this.presenter});
+  const AlunoFormPage({super.key, required this.presenter});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -25,7 +25,7 @@ class _AlunoFormPageState extends State<AlunoFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white, // Fundo branco no estilo Instagram.
+        backgroundColor: Colors.white, // Fundo branco no estilo Fluent.
         title: const Text(
           'Cadastrar Aluno', // Título do AppBar.
           style: TextStyle(
@@ -45,28 +45,11 @@ class _AlunoFormPageState extends State<AlunoFormPage> {
                 CrossAxisAlignment.start, // Alinha os elementos à esquerda.
             children: [
               // Campo de texto para o código do aluno.
-              TextFormField(
-                controller:
-                    _codigoController, // Conecta o controlador ao campo.
-                decoration: const InputDecoration(
-                  labelText: 'Código', // Texto de rótulo.
-                  labelStyle: TextStyle(
-                    color: Colors.black, // Texto preto.
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Colors.grey), // Borda inferior cinza.
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                        color:
-                            Colors.blueAccent), // Borda inferior azul ao focar.
-                  ),
-                ),
-                keyboardType:
-                    TextInputType.number, // Tipo de entrada: numérica.
+              _buildTextField(
+                controller: _codigoController,
+                label: 'Código',
+                keyboardType: TextInputType.number,
                 validator: (value) {
-                  // Validação do campo.
                   if (value == null || value.isEmpty) {
                     return 'Informe o código do aluno'; // Mensagem de erro se o campo estiver vazio.
                   }
@@ -76,87 +59,41 @@ class _AlunoFormPageState extends State<AlunoFormPage> {
               SizedBox(height: 20), // Espaçamento vertical.
 
               // Campo de texto para o nome do aluno.
-              TextFormField(
-                controller: _nomeController, // Conecta o controlador ao campo.
-                decoration: const InputDecoration(
-                  labelText: 'Nome', // Texto de rótulo.
-                  labelStyle: TextStyle(
-                    color: Colors.black, // Texto preto.
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Colors.grey), // Borda inferior cinza.
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                        color:
-                            Colors.blueAccent), // Borda inferior azul ao focar.
-                  ),
-                ),
+              _buildTextField(
+                controller: _nomeController,
+                label: 'Nome',
                 validator: (value) {
-                  // Validação do campo.
                   if (value == null || value.isEmpty) {
-                    return 'Informe o nome do aluno'; // Mensagem de erro se o campo estiver vazio.
+                    return 'Informe o nome do aluno';
                   }
-                  return null; // Sem erro.
+                  return null;
                 },
               ),
               SizedBox(height: 20), // Espaçamento vertical.
 
               // Campo de texto para a idade do aluno.
-              TextFormField(
-                controller: _idadeController, // Conecta o controlador ao campo.
-                decoration: const InputDecoration(
-                  labelText: 'Idade', // Texto de rótulo.
-                  labelStyle: TextStyle(
-                    color: Colors.black, // Texto preto.
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Colors.grey), // Borda inferior cinza.
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                        color:
-                            Colors.blueAccent), // Borda inferior azul ao focar.
-                  ),
-                ),
-                keyboardType:
-                    TextInputType.number, // Tipo de entrada: numérica.
+              _buildTextField(
+                controller: _idadeController,
+                label: 'Idade',
+                keyboardType: TextInputType.number,
                 validator: (value) {
-                  // Validação do campo.
                   if (value == null || value.isEmpty) {
-                    return 'Informe a idade do aluno'; // Mensagem de erro se o campo estiver vazio.
+                    return 'Informe a idade do aluno';
                   }
-                  return null; // Sem erro.
+                  return null;
                 },
               ),
               SizedBox(height: 20), // Espaçamento vertical.
 
               // Campo de texto para a turma do aluno.
-              TextFormField(
-                controller: _turmaController, // Conecta o controlador ao campo.
-                decoration: const InputDecoration(
-                  labelText: 'Turma', // Texto de rótulo.
-                  labelStyle: TextStyle(
-                    color: Colors.black, // Texto preto.
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Colors.grey), // Borda inferior cinza.
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                        color:
-                            Colors.blueAccent), // Borda inferior azul ao focar.
-                  ),
-                ),
+              _buildTextField(
+                controller: _turmaController,
+                label: 'Turma',
                 validator: (value) {
-                  // Validação do campo.
                   if (value == null || value.isEmpty) {
-                    return 'Informe a turma do aluno'; // Mensagem de erro se o campo estiver vazio.
+                    return 'Informe a turma do aluno';
                   }
-                  return null; // Sem erro.
+                  return null;
                 },
               ),
               SizedBox(height: 30), // Espaçamento maior antes do botão.
@@ -170,32 +107,25 @@ class _AlunoFormPageState extends State<AlunoFormPage> {
                     if (_formKey.currentState!.validate()) {
                       // Se todos os campos são válidos, cria uma nova instância de Aluno.
                       Aluno aluno = Aluno(
-                        codigo: int.parse(_codigoController
-                            .text), // Converte o código para int.
-                        nome: _nomeController
-                            .text, // Atribui o nome do controlador.
-                        idade: int.parse(_idadeController
-                            .text), // Converte a idade para int.
-                        turma: _turmaController
-                            .text, // Atribui a turma do controlador.
+                        codigo: int.parse(_codigoController.text), // Converte o código para int.
+                        nome: _nomeController.text, // Atribui o nome do controlador.
+                        idade: int.parse(_idadeController.text), // Converte a idade para int.
+                        turma: _turmaController.text, // Atribui a turma do controlador.
                       );
                       // Chama o método addAluno do presenter para adicionar o aluno.
                       widget.presenter.addAlunoFirebase(aluno).then((_) {
                         // Após adicionar o aluno, fecha a página e retorna true.
-                        // ignore: use_build_context_synchronously
                         Navigator.pop(context, true);
                       });
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context)
-                        .primaryColor, // Cor do botão igual ao tema.
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16), // Espaçamento interno vertical.
+                    backgroundColor: Colors.blue.shade400, // Cor vibrante para o botão.
+                    padding: const EdgeInsets.symmetric(vertical: 16), // Espaçamento interno vertical.
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          10), // Borda arredondada no botão.
+                      borderRadius: BorderRadius.circular(12), // Borda arredondada mais suave.
                     ),
+                    elevation: 4, // Adiciona uma leve sombra para o efeito de profundidade.
                   ),
                   child: const Text(
                     'Salvar', // Texto do botão.
@@ -210,6 +140,30 @@ class _AlunoFormPageState extends State<AlunoFormPage> {
           ),
         ),
       ),
+    );
+  }
+
+  // Função reutilizável para criar campos de texto.
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    TextInputType? keyboardType,
+    String? Function(String?)? validator,
+  }) {
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle: TextStyle(color: Colors.black),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey.shade400),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.blueAccent),
+        ),
+      ),
+      keyboardType: keyboardType,
+      validator: validator,
     );
   }
 }

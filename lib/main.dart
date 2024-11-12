@@ -21,24 +21,39 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'App de Alunos',
+      title: 'Login App',
       theme: ThemeData(
-        brightness: Brightness.light,
-        primaryColor: const Color(0xFF405DE6),
-        primarySwatch: Colors.blue,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.white,
-          titleTextStyle: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 22,
+        // Estilo de cores inspirados no Fluent Design
+        primaryColor: Colors.blue, // Azul fluido
+        hintColor: Colors.blue,
+        scaffoldBackgroundColor: Colors.white,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10), // Bordas arredondadas
           ),
-          iconTheme: IconThemeData(color: Colors.black),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.blue), // Azul fluido
+            borderRadius: BorderRadius.circular(10),
+          ),
         ),
-        buttonTheme: const ButtonThemeData(
-          buttonColor: Color(0xFF405DE6),
-          textTheme: ButtonTextTheme.primary,
+        textTheme: TextTheme(
+          bodyLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          bodyMedium: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
         ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.white, // Cor fluido do botão
+            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+        ),
+        shadowColor: Colors.black.withOpacity(0.2),
+        cardColor: Colors.white,
+        // Outros estilos fluentes que você pode adicionar (como bordas, sombras)
       ),
       home: LoginPage(),
     );
