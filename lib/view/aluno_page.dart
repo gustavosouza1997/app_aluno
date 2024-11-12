@@ -6,7 +6,9 @@ import 'aluno_form_page.dart';
 
 // Define uma página que exibe uma lista de alunos e permite adicionar novos alunos
 class AlunoPage extends StatefulWidget {
+
   @override
+  // ignore: library_private_types_in_public_api
   _AlunoPageState createState() => _AlunoPageState();
 }
 
@@ -27,8 +29,7 @@ class _AlunoPageState extends State<AlunoPage> implements AlunoView {
 
     // Inicializa o presenter e busca os alunos
     presenter = AlunoPresenter(this);
-    presenter
-        .fetchAlunosFirebase(); // Faz a requisição para buscar os alunos no backend
+    presenter.fetchAlunosFirebase(); // Faz a requisição para buscar os alunos no backend
   }
 
   // Método que atualiza a lista de alunos exibida

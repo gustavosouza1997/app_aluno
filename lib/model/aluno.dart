@@ -28,8 +28,7 @@ class Aluno {
   // Útil para transformar o objeto Aluno em um formato que possa ser serializado e enviado para uma API.
   Map<String, dynamic> toJson() {
     return {
-      'codigo':
-          codigo, // Mapeia o atributo 'codigo' para o campo 'codigo' no JSON.
+      'codigo': codigo, // Mapeia o atributo 'codigo' para o campo 'codigo' no JSON.
       'nome': nome, // Mapeia o atributo 'nome' para o campo 'nome' no JSON.
       'idade': idade, // Mapeia o atributo 'idade' para o campo 'idade' no JSON.
       'turma': turma, // Mapeia o atributo 'turma' para o campo 'turma' no JSON.

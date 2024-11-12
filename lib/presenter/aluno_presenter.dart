@@ -1,23 +1,19 @@
 import 'dart:convert'; // Importa o pacote para codificação e decodificação JSON.
 import 'package:app_aluno/model/aluno.dart'; // Importa o modelo Aluno.
-import 'package:http/http.dart'
-    as http; // Importa o pacote HTTP para fazer requisições web.
+import 'package:http/http.dart' as http; // Importa o pacote HTTP para fazer requisições web.
 import '../view/aluno_view.dart'; // Importa a interface de visualização AlunoView.
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AlunoPresenter {
-  final AlunoView
-      view; // Instância de AlunoView para comunicação entre o Presenter e a View.
+  final AlunoView view; // Instância de AlunoView para comunicação entre o Presenter e a View.
 
-  final CollectionReference alunosRef =
-      FirebaseFirestore.instance.collection('alunos');
+  final CollectionReference alunosRef = FirebaseFirestore.instance.collection('alunos');
 
   // Construtor da classe AlunoPresenter, que inicializa a instância de view.
   AlunoPresenter(this.view);
 
   // URL da API que fornece o CRUD de alunos. - que tal usar um arquivo env aqui?
-  final String apiUrl =
-      'https://back-aluno-dcdybdggbkfrguan.brazilsouth-01.azurewebsites.net/alunos';
+  final String apiUrl = 'https://back-aluno-dcdybdggbkfrguan.brazilsouth-01.azurewebsites.net/alunos';
 
   // Método que busca os alunos da API de forma assíncrona.
   Future<void> fetchAlunos() async {
@@ -95,7 +91,7 @@ class AlunoPresenter {
   // Método para adicionar um aluno ao Firestore.
   Future<void> addAlunoFirebase(Aluno aluno) async {
     try {
-      print("Salvando aluno no Firestore: ${aluno.toJson()}");
+      //print("Salvando aluno no Firestore: ${aluno.toJson()}");
       // Adiciona um novo documento na coleção 'alunos'.
       await alunosRef.add(aluno.toJson());
 

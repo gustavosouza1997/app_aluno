@@ -85,5 +85,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'appaluno-8a77b.firebasestorage.app',
     measurementId: 'G-YMSSJBTR6V',
   );
-
 }

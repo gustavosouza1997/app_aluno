@@ -4,28 +4,22 @@ import 'package:flutter/material.dart'; // Importa o pacote de UI do Flutter.
 import '../presenter/aluno_presenter.dart'; // Importa o AlunoPresenter para a comunicação entre o formulário e o backend.
 
 class AlunoFormPage extends StatefulWidget {
-  final AlunoPresenter
-      presenter; // O presenter que gerencia a lógica do formulário.
+  final AlunoPresenter presenter; // O presenter que gerencia a lógica do formulário.
 
   // Construtor da página de formulário. Recebe o presenter como argumento.
-  AlunoFormPage({required this.presenter});
+  const AlunoFormPage({required this.presenter});
 
   @override
-  _AlunoFormPageState createState() =>
-      _AlunoFormPageState(); // Cria o estado da página.
+  // ignore: library_private_types_in_public_api
+  _AlunoFormPageState createState() => _AlunoFormPageState(); // Cria o estado da página.
 }
 
 class _AlunoFormPageState extends State<AlunoFormPage> {
-  final _formKey = GlobalKey<
-      FormState>(); // Chave global para identificar o formulário e validar os campos.
-  final _codigoController =
-      TextEditingController(); // Controlador para o campo de código do aluno.
-  final _nomeController =
-      TextEditingController(); // Controlador para o campo de nome.
-  final _idadeController =
-      TextEditingController(); // Controlador para o campo de idade.
-  final _turmaController =
-      TextEditingController(); // Controlador para o campo de turma.
+  final _formKey = GlobalKey<FormState>(); // Chave global para identificar o formulário e validar os campos.
+  final _codigoController = TextEditingController(); // Controlador para o campo de código do aluno.
+  final _nomeController = TextEditingController(); // Controlador para o campo de nome.
+  final _idadeController = TextEditingController(); // Controlador para o campo de idade.
+  final _turmaController = TextEditingController(); // Controlador para o campo de turma.
 
   @override
   Widget build(BuildContext context) {
@@ -188,6 +182,7 @@ class _AlunoFormPageState extends State<AlunoFormPage> {
                       // Chama o método addAluno do presenter para adicionar o aluno.
                       widget.presenter.addAlunoFirebase(aluno).then((_) {
                         // Após adicionar o aluno, fecha a página e retorna true.
+                        // ignore: use_build_context_synchronously
                         Navigator.pop(context, true);
                       });
                     }
